@@ -13,7 +13,6 @@ This is an experimental system comprising
 - machine learning and 
 - statistical process control over a distributed network.
 
-![alt text](c3i.png "Sample mapping page")
 
 I am writing this system using slightly older technology, but decided to
 write this version concurrently using Angular2 (Beta) and Bootstrap 4.
@@ -21,6 +20,7 @@ write this version concurrently using Angular2 (Beta) and Bootstrap 4.
 This will allow me to appraise the readiness of these development tools,
 and to consider the architectures for up-coming builds.
 
+![alt text](images/c3i.png "Sample mapping page")
 
 This is from Intelligent Aerospace, July 2016.
 
