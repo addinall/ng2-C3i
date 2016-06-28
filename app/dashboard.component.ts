@@ -13,12 +13,38 @@
 //
 // -------------------------------
 
-	import { Component } from '@angular/core';
+	import { Component, OnInit }    from '@angular/core';
+    import { Router }               from '@angular/router-deprecated';
+
+    import { Asset }                from './asset';
+    import { AssetService }         from './asset.service';
+
 
 	@Component({
 		selector: 'c3i-dashboard',
-		template: '<h3>C3I COMMAND and CONTROL Dashboard</h3>'
+        templateUrl: 'app/dashboard.component.html',
+        styleUrls: ['app/dasboard.component.css']
 	})
 
-	export class DashboardComponent { }
+	export class DashboardComponent implements OnInit{ 
+    
+        assets: Asset[] = [];
 
+        constructor(
+            private router: Router,
+            private assetService: AssetService) {
+        }
+
+        ngOnInit() {
+            this.assetService.getAssets()
+                .then(assets => this.assets = assets.slice(1, 5));
+        }
+
+        gotoDetail(asset: Asset) {
+            let link = ['AssetDetail', { id: asset.id }];
+            this.router.navigate(link);
+        }
+    }
+
+
+// -------------------  EOF   -------------------------------------

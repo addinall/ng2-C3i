@@ -17,10 +17,11 @@
     import  { Component         }   from    '@angular/core';
     import  { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
 
-    import  { AssetService      }   from    './asset.service';
-    import  { AssetsComponent   }   from    './assets.component';
-
     import  { DashboardComponent}   from    './dashboard.component';
+    import  { AssetsComponent   }   from    './assets.component';
+    import  { AssetDetailComponent} from    './asset-detail.component';
+    import  { AssetService      }   from    './asset.service';
+
 
 
     @Component({
@@ -33,6 +34,7 @@
                     </nav>
                     <router-outlet><router-outlet>
                   `,
+        styleUrls: ['app/app.component.css'],
         directives: [ROUTER_DIRECTIVES],
         providers:  [
             ROUTER_PROVIDERS,
@@ -46,6 +48,11 @@
            name:            'Dashboard',
            component:       DashboardComponent,
            useAsDefault:    true
+       },
+       {
+           path:            'detail/:id',
+           name:            'AssetDetail',
+           component:       AssetDetailComponent
        },
        {
            path:            '/assets',

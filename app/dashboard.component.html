@@ -1,0 +1,28 @@
+<!--
+// CAPTAIN SLOG
+// vim: set expandtab tabstop=4 shiftwidth=4 autoindent smartindent:
+// File         : dashboard.component.html
+// System       : ng2-C3I 
+// Date         : June  2016
+// Author       : Mark Addinall
+// Synopsis     : This system is the clone of C3I using newer technology.
+//                Although C3I is using VERY up to date tools and design
+//                coding concepts, this takes R&D a step further by
+//                basing the architecture of this version around
+//                Angular2 and Bootstrap4.
+//
+//
+-->
+
+<h3>Urgent Alarms</h3>
+<div class="grid grid-pad">
+	<div *ngFor="let asset of assets" (click)="gotoDetail(asset)" class="col-1-4">
+		<div class="module asset">
+			<h4>{{asset.name}}</h4>
+		</div>
+	</div>
+</div>
+
+<!--     EOF              -->
+
+
