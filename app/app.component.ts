@@ -1,6 +1,6 @@
 // CAPTAIN SLOG
 // vim: set expandtab tabstop=4 shiftwidth=4 autoindent smartindent:
-// File         : app.components.ts 
+// File         : app.component.ts 
 // System       : ng2-C3I 
 // Date         : June  2016
 // Author       : Mark Addinall
@@ -13,27 +13,18 @@
 //
 // -------------------------------
 
-    import { Component } from '@angular/core';                  // This is the base of the Angular magic.
+    import { Component, OnInit } from '@angular/core';          // This is the base of the Angular magic.
                                                                 // near EVERYTHING in an Angular app is
                                                                 // a component 
     import { Asset } from './asset';                            // Bring in our asset class
 
     import { AssetDetailComponent } from './asset-detail.component';
 
+    import { AssetService } from './asset.service';             // injectable service factory
 
 
-    const ASSETS: Asset[] = [                                   // this lot is going to come out of some
-        { id: 11, name: 'Barometer',    owner: 'Addinall'   },  // sort of data store that will be provided to
-        { id: 12, name: 'Thermometer',  owner: 'Addinall'   },  // us via a RESTful server.  In this case,
-        { id: 13, name: 'Bettsometer',  owner: 'Addinall'   },  // the one I am writing in the
-        { id: 14, name: 'Actinometer',  owner: 'Smith'      },  // backend bits of code.
-        { id: 15, name: 'Densimeter',   owner: 'Smith'      },  // this stuff is for testing purposes.
-        { id: 16, name: 'Dynometer',    owner: 'Smith'      },
-        { id: 17, name: 'Fathometer',   owner: 'DuPont'     },
-        { id: 18, name: 'Hygrometer',   owner: 'DuPont'     },
-        { id: 19, name: 'Magnetometer', owner: 'DuPont'     },
-        { id: 20, name: 'Manometer',    owner: 'Tynes'      }
-    ];
+
+
 
 
 
@@ -112,18 +103,36 @@
                         border-radius: 4px 0 0 4px;
                     }
                 `],
-        directives: [AssetDetailComponent]
+        directives: [AssetDetailComponent],
+        providers:  [AssetService] 
     })              
 
 
-    export class AppComponent {                                 // and make an application component
+    //-------------------------
+    export class AppComponent implements OnInit {               // and make an application component
+
         title = 'ng2-C3I COMMAND and CONTROL';                  // visible to all.
-        public assets = ASSETS;
+        assets: Asset[];
         selectedAsset: Asset;
+    
+        constructor(private assetService: AssetService) {}      // inject one in
+    
+        getAssets() {
+
+            this.assetService.getAssets().then(assets => this.assets = assets);
+        }
+
+        
+        ngOnInit() {
+            this.getAssets();
+        }
+
         onSelect(asset: Asset) {
             this.selectedAsset = asset;
         }
     }
+
+
 
 
 // --------------------------  EOF --------------------------
