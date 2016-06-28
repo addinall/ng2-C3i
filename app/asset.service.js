@@ -22,18 +22,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var mock_assets_1 = require('./mock-assets');
+var core_1 = require('@angular/core'); // allow us to inject factories
+var mock_assets_1 = require('./mock-assets'); //  test data
 var AssetService = (function () {
     function AssetService() {
     }
     AssetService.prototype.getAssets = function () {
-        return Promise.resolve(mock_assets_1.ASSETS);
+        return Promise.resolve(mock_assets_1.ASSETS); // asynchronous, so PROMISE
     };
     AssetService = __decorate([
-        Injectable(), 
+        //  test data
+        core_1.Injectable(), 
         __metadata('design:paramtypes', [])
     ], AssetService);
     return AssetService;
 }());
 exports.AssetService = AssetService;
+// -------------- EOF -------------------
 //# sourceMappingURL=asset.service.js.map

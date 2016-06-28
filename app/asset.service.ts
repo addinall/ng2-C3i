@@ -13,18 +13,18 @@
 //
 // -------------------------------
 
-    import { injectable } from '@angular/core';
+    import { Injectable } from '@angular/core';         // allow us to inject factories
 
-    import { Hero } from './hero';
-    import { ASSETS } from './mock-assets';
+    import { Asset } from './asset';                    // asset object definition
+    import { ASSETS } from './mock-assets';             //  test data
 
 
-    @Injectable()
-    export class AssetService {
+    @Injectable()                                       // this is the class we will inject
+    export class AssetService {                         // as a service 'factory'
         getAssets() {
-
-            return Promise.resolve(ASSETS);
+            return Promise.resolve(ASSETS);             // asynchronous, so PROMISE
         }
     }
 
+    // -------------- EOF -------------------
 
