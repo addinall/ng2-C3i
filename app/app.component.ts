@@ -36,7 +36,7 @@
                         margin: 0 0 2em 0;
                         list-style-type: none;
                         padding: 0;
-                        width: 15em;
+                        width: 35em;
                     }
                     .assets li {
                         cursor: pointer;
@@ -61,7 +61,7 @@
                         position: relative;
                         top: -3px;
                     }
-                    .assets .badge {
+                    .assets .state {
                         display: inline-block;
                         font-size: small;
                         color: white;
@@ -75,34 +75,48 @@
                         margin-right: .8em;
                         border-radius: 4px 0 0 4px;
                     }
+                    
+                    .assets .name {
+                        display: inline-block;
+                        width: 16em;
+                        padding: 0.8em 0.7em 0 0.7em;
+                        line-height: 1em;
+                        position: relative;
+                        margin-right: .8em;
+                        border-radius: 4px 0 0 4px;
+                    }
                 `]
         template: `<h1>{{title}}</h1>
                     <h2>Active Assets</h2>
                     <ul class="assets">
-                        <li *ngFor="let asset of assets">
-                            <span class="state"> {{asset.id}}</span><span> {{asset.name}}</span> {{asset.owner}}
+                        <li *ngFor="let asset of assets" 
+                            [class.selected]="asset === selectedAsset"
+                            (click)="onSelect(asset)">
+                            <span class="state"> {{asset.id}}</span><span class="name"> {{asset.name}}</span> {{asset.owner}}
                         </li>
                     </ul>
-                    <h2>{{asset.name}} Details.</h2> 
-                    <h3>{{asset.owner}} Owner.</h3> 
-                    <div><label>id: </label>{{asset.id}}</div>
-                    <div>
-                        <label>Owner: </label>
-                        <input [(ngModel)]="asset.owner" placeholder="name">
-                    </div>
-                    `
-    })
+                    <div *ngIf="selectedAsset">
+                        <h2>{{selectedAsset.name}} Details.</h2> 
+                        <h3>{{selectedAsset.owner}} Owner.</h3> 
+                        <div><label>id: </label>{{selectedAsset.id}}</div>
+                        <div><label>Name: </label>{{selectedAsset.name}}</div>
+                        <div>
+                            <label>Owner: </label>
+                            <input [(ngModel)]="selectedAsset.owner" placeholder="name">
+                        </div>
+                    </div>    `
+    })              
 
 
     export class AppComponent {                                 // and make an application component
         title = 'ng2-C3I COMMAND and CONTROL';                  // visible to all.
         public assets = ASSETS;
-        asset: Asset = {
-                        id: 10.
-                        name: 'Speedometer',
-                        owner: 'Addinall'
-        };
+        selectedAsset: Asset;
+        onSelect(asset: Asset) {
+            this.selectedAsset = asset;
+        }
     }
+
 
 
     const ASSETS: Asset[] = [                                   // this lot is going to come out of some
