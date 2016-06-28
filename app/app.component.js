@@ -23,14 +23,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core'); // This is the base of the Angular magic.
-// near EVERYTHING in an Angular app is
-// a component 
-var Asset = (function () {
-    function Asset() {
-    }
-    return Asset;
-}());
-exports.Asset = Asset;
+var asset_detail_component_1 = require('./asset-detail.component');
+var ASSETS = [
+    { id: 11, name: 'Barometer', owner: 'Addinall' },
+    { id: 12, name: 'Thermometer', owner: 'Addinall' },
+    { id: 13, name: 'Bettsometer', owner: 'Addinall' },
+    { id: 14, name: 'Actinometer', owner: 'Smith' },
+    { id: 15, name: 'Densimeter', owner: 'Smith' },
+    { id: 16, name: 'Dynometer', owner: 'Smith' },
+    { id: 17, name: 'Fathometer', owner: 'DuPont' },
+    { id: 18, name: 'Hygrometer', owner: 'DuPont' },
+    { id: 19, name: 'Magnetometer', owner: 'DuPont' },
+    { id: 20, name: 'Manometer', owner: 'Tynes' }
+];
 var AppComponent = (function () {
     function AppComponent() {
         this.title = 'ng2-C3I COMMAND and CONTROL'; // visible to all.
@@ -45,25 +50,14 @@ var AppComponent = (function () {
             // seperate file by the end of the day.  Just in
             // anyone is having a peek.
             selector: 'my-app',
+            template: "<h1>{{title}}</h1>\n                    <h2>Active Assets</h2>\n                    <ul class=\"assets\">\n                        <li *ngFor=\"let asset of assets\" \n                            [class.selected]=\"asset === selectedAsset\"\n                            (click)=\"onSelect(asset)\">\n                            <span class=\"state\"> {{asset.id}}</span><span class=\"name\"> {{asset.name}}</span> {{asset.owner}}\n                        </li>\n                    </ul>\n                    <my-asset-detail [asset]=\"selectedAsset\"></my-asset-detail>    \n                ",
             styles: ["\n                    .selected {\n                        background-color: #CFD8DC !important;\n                        color: white;\n                    }\n                    .assets {\n                        margin: 0 0 2em 0;\n                        list-style-type: none;\n                        padding: 0;\n                        width: 35em;\n                    }\n                    .assets li {\n                        cursor: pointer;\n                        position: relative;\n                        left: 0;\n                        background-color: #EEE;\n                        margin: .5em;\n                        padding: .3em 0;\n                        height: 1.6em;\n                        border-radius: 4px;\n                    }\n                    .assets li.selected:hover {\n                        background-color: #BBD8DC !important;\n                        color: white;\n                    }\n                    .assets li:hover {\n                        color: #607D8B;\n                        background-color: #DDD;\n                        left: .1em;\n                    }\n                    .assets .text {\n                        position: relative;\n                        top: -3px;\n                    }\n                    .assets .state {\n                        display: inline-block;\n                        font-size: small;\n                        color: white;\n                        padding: 0.8em 0.7em 0 0.7em;\n                        background-color: #607D8B;\n                        line-height: 1em;\n                        position: relative;\n                        left: -1px;\n                        top: -4px;\n                        height: 1.8em;\n                        margin-right: .8em;\n                        border-radius: 4px 0 0 4px;\n                    }\n                    \n                    .assets .name {\n                        display: inline-block;\n                        width: 16em;\n                        padding: 0.8em 0.7em 0 0.7em;\n                        line-height: 1em;\n                        position: relative;\n                        margin-right: .8em;\n                        border-radius: 4px 0 0 4px;\n                    }\n                "],
-            template: "<h1>{{title}}</h1>\n                    <h2>Active Assets</h2>\n                    <ul class=\"assets\">\n                        <li *ngFor=\"let asset of assets\" \n                            [class.selected]=\"asset === selectedAsset\"\n                            (click)=\"onSelect(asset)\">\n                            <span class=\"state\"> {{asset.id}}</span><span class=\"name\"> {{asset.name}}</span> {{asset.owner}}\n                        </li>\n                    </ul>\n                    <div *ngIf=\"selectedAsset\">\n                        <h2>{{selectedAsset.name}} Details.</h2> \n                        <h3>{{selectedAsset.owner}} Owner.</h3> \n                        <div><label>id: </label>{{selectedAsset.id}}</div>\n                        <div><label>Name: </label>{{selectedAsset.name}}</div>\n                        <div>\n                            <label>Owner: </label>\n                            <input [(ngModel)]=\"selectedAsset.owner\" placeholder=\"name\">\n                        </div>\n                    </div>    "
+            directives: [asset_detail_component_1.AssetDetailComponent]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
     return AppComponent;
 }());
 exports.AppComponent = AppComponent;
-var ASSETS = [
-    { id: 11, name: 'Barometer', owner: 'Addinall' },
-    { id: 12, name: 'Thermometer', owner: 'Addinall' },
-    { id: 13, name: 'Bettsometer', owner: 'Addinall' },
-    { id: 14, name: 'Actinometer', owner: 'Smith' },
-    { id: 15, name: 'Densimeter', owner: 'Smith' },
-    { id: 16, name: 'Dynometer', owner: 'Smith' },
-    { id: 17, name: 'Fathometer', owner: 'DuPont' },
-    { id: 18, name: 'Hygrometer', owner: 'DuPont' },
-    { id: 19, name: 'Magnetometer', owner: 'DuPont' },
-    { id: 20, name: 'Manometer', owner: 'Tynes' }
-];
 // --------------------------  EOF --------------------------
 //# sourceMappingURL=app.component.js.map

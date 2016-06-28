@@ -1,7 +1,6 @@
-"use strict";
 // CAPTAIN SLOG
 // vim: set expandtab tabstop=4 shiftwidth=4 autoindent smartindent:
-// File         : main.ts 
+// File         : asset.ts 
 // System       : ng2-C3I 
 // Date         : June  2016
 // Author       : Mark Addinall
@@ -13,7 +12,12 @@
 //
 //
 // -------------------------------
-var platform_browser_dynamic_1 = require('@angular/platform-browser-dynamic');
-var app_component_1 = require('./app.component');
-platform_browser_dynamic_1.bootstrap(app_component_1.AppComponent);
-//# sourceMappingURL=main.js.map
+"use strict";
+var Asset = (function () {
+    function Asset() {
+    }
+    return Asset;
+}());
+exports.Asset = Asset;
+// --------------------------  EOF --------------------------
+//# sourceMappingURL=asset.js.map

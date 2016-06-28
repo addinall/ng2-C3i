@@ -16,17 +16,43 @@
     import { Component } from '@angular/core';                  // This is the base of the Angular magic.
                                                                 // near EVERYTHING in an Angular app is
                                                                 // a component 
-    export class Asset {                                        // In this syntax of JS, we have                               
-        id:     number;                                         // introduced the classic representation
-        name:   string;                                         // of application 'objects'.  Some don't
-        owner:  string;                                         // like this.  Easier to read than closuers I think.
-    }
+    import { Asset } from './asset';                            // Bring in our asset class
+
+    import { AssetDetailComponent } from './asset-detail.component';
+
+
+
+    const ASSETS: Asset[] = [                                   // this lot is going to come out of some
+        { id: 11, name: 'Barometer',    owner: 'Addinall'   },  // sort of data store that will be provided to
+        { id: 12, name: 'Thermometer',  owner: 'Addinall'   },  // us via a RESTful server.  In this case,
+        { id: 13, name: 'Bettsometer',  owner: 'Addinall'   },  // the one I am writing in the
+        { id: 14, name: 'Actinometer',  owner: 'Smith'      },  // backend bits of code.
+        { id: 15, name: 'Densimeter',   owner: 'Smith'      },  // this stuff is for testing purposes.
+        { id: 16, name: 'Dynometer',    owner: 'Smith'      },
+        { id: 17, name: 'Fathometer',   owner: 'DuPont'     },
+        { id: 18, name: 'Hygrometer',   owner: 'DuPont'     },
+        { id: 19, name: 'Magnetometer', owner: 'DuPont'     },
+        { id: 20, name: 'Manometer',    owner: 'Tynes'      }
+    ];
+
+
 
     @Component({                                                // set up THIS Component
                                                                 // All iof this CSS is going to live in it's own
                                                                 // seperate file by the end of the day.  Just in
                                                                 // anyone is having a peek.
         selector: 'my-app',
+        template: `<h1>{{title}}</h1>
+                    <h2>Active Assets</h2>
+                    <ul class="assets">
+                        <li *ngFor="let asset of assets" 
+                            [class.selected]="asset === selectedAsset"
+                            (click)="onSelect(asset)">
+                            <span class="state"> {{asset.id}}</span><span class="name"> {{asset.name}}</span> {{asset.owner}}
+                        </li>
+                    </ul>
+                    <my-asset-detail [asset]="selectedAsset"></my-asset-detail>    
+                `,
         styles: [`
                     .selected {
                         background-color: #CFD8DC !important;
@@ -85,26 +111,8 @@
                         margin-right: .8em;
                         border-radius: 4px 0 0 4px;
                     }
-                `]
-        template: `<h1>{{title}}</h1>
-                    <h2>Active Assets</h2>
-                    <ul class="assets">
-                        <li *ngFor="let asset of assets" 
-                            [class.selected]="asset === selectedAsset"
-                            (click)="onSelect(asset)">
-                            <span class="state"> {{asset.id}}</span><span class="name"> {{asset.name}}</span> {{asset.owner}}
-                        </li>
-                    </ul>
-                    <div *ngIf="selectedAsset">
-                        <h2>{{selectedAsset.name}} Details.</h2> 
-                        <h3>{{selectedAsset.owner}} Owner.</h3> 
-                        <div><label>id: </label>{{selectedAsset.id}}</div>
-                        <div><label>Name: </label>{{selectedAsset.name}}</div>
-                        <div>
-                            <label>Owner: </label>
-                            <input [(ngModel)]="selectedAsset.owner" placeholder="name">
-                        </div>
-                    </div>    `
+                `],
+        directives: [AssetDetailComponent]
     })              
 
 
@@ -116,22 +124,6 @@
             this.selectedAsset = asset;
         }
     }
-
-
-
-    const ASSETS: Asset[] = [                                   // this lot is going to come out of some
-        { id: 11, name: 'Barometer',    owner: 'Addinall'   },  // sort of data store that will be provided to
-        { id: 12, name: 'Thermometer',  owner: 'Addinall'   },  // us via a RESTful server.  In this case,
-        { id: 13, name: 'Bettsometer',  owner: 'Addinall'   },  // the one I am writing in the
-        { id: 14, name: 'Actinometer',  owner: 'Smith'      },  // backend bits of code.
-        { id: 15, name: 'Densimeter',   owner: 'Smith'      },  // this stuff is for testing purposes.
-        { id: 16, name: 'Dynometer',    owner: 'Smith'      },
-        { id: 17, name: 'Fathometer',   owner: 'DuPont'     },
-        { id: 18, name: 'Hygrometer',   owner: 'DuPont'     },
-        { id: 19, name: 'Magnetometer', owner: 'DuPont'     },
-        { id: 20, name: 'Manometer',    owner: 'Tynes'      }
-    ];
-
 
 
 // --------------------------  EOF --------------------------
