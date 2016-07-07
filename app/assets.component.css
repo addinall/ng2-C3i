@@ -1,6 +1,7 @@
+/*
 // CAPTAIN SLOG
 // vim: set expandtab tabstop=4 shiftwidth=4 autoindent smartindent:
-// File         : main.ts 
+// File         : assets.component.css 
 // System       : ng2-C3I 
 // Date         : June  2016
 // Author       : Mark Addinall
@@ -12,15 +13,10 @@
 //
 //
 // -------------------------------
-import { bootstrap }            from '@angular/platform-browser-dynamic';
+*/
 
-import { AppComponent }         from './app.component';
-import { APP_ROUTER_PROVIDERS } from './app.routes';
+.test {
+	color: blue;
+}
 
-bootstrap(AppComponent, [
-         APP_ROUTER_PROVIDERS
-]);
-
-
-// ---------   EOF ------------------
 

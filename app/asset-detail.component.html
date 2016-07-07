@@ -1,6 +1,7 @@
+<!--
 // CAPTAIN SLOG
 // vim: set expandtab tabstop=4 shiftwidth=4 autoindent smartindent:
-// File         : main.ts 
+// File         : asset-detail.component.html 
 // System       : ng2-C3I 
 // Date         : June  2016
 // Author       : Mark Addinall
@@ -11,16 +12,16 @@
 //                Angular2 and Bootstrap4.
 //
 //
-// -------------------------------
-import { bootstrap }            from '@angular/platform-browser-dynamic';
+-->
 
-import { AppComponent }         from './app.component';
-import { APP_ROUTER_PROVIDERS } from './app.routes';
-
-bootstrap(AppComponent, [
-         APP_ROUTER_PROVIDERS
-]);
-
-
-// ---------   EOF ------------------
+<div *ngIf="asset">
+  <h2>{{asset.name}} description</h2>
+  <div>
+    <label>id: </label>{{asset.id}}</div>
+  <div>
+    <label>name: </label>
+    <input [(ngModel)]="asset.name" placeholder="name" />
+  </div>
+  <button (click)="goBack()">Back</button>
+</div>
 

@@ -14,7 +14,7 @@
 // -------------------------------
 
 	import { Component, OnInit }    from '@angular/core';
-    import { Router }               from '@angular/router-deprecated';
+    import { Router }               from '@angular/router';
 
     import { Asset }                from './asset';
     import { AssetService }         from './asset.service';
@@ -23,7 +23,7 @@
 	@Component({
 		selector: 'c3i-dashboard',
         templateUrl: 'app/dashboard.component.html',
-        styleUrls: ['app/dasboard.component.css']
+        styleUrls: ['app/dashboard.component.css']
 	})
 
 	export class DashboardComponent implements OnInit{ 

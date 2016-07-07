@@ -1,6 +1,7 @@
+<!--
 // CAPTAIN SLOG
 // vim: set expandtab tabstop=4 shiftwidth=4 autoindent smartindent:
-// File         : main.ts 
+// File         : assets.componetnts.html 
 // System       : ng2-C3I 
 // Date         : June  2016
 // Author       : Mark Addinall
@@ -10,17 +11,20 @@
 //                basing the architecture of this version around
 //                Angular2 and Bootstrap4.
 //
-//
-// -------------------------------
-import { bootstrap }            from '@angular/platform-browser-dynamic';
+-->
 
-import { AppComponent }         from './app.component';
-import { APP_ROUTER_PROVIDERS } from './app.routes';
-
-bootstrap(AppComponent, [
-         APP_ROUTER_PROVIDERS
-]);
-
-
-// ---------   EOF ------------------
+<h2>Asset List</h2>
+<ul class="assets">
+  <li *ngFor="let asset of assets"
+    [class.selected]="asset === selectedAsset"
+    (click)="onSelect(asset)">
+    <span class="badge">{{asset.id}}</span> {{asset.name}}
+  </li>
+</ul>
+<div *ngIf="selectedAsset">
+  <h2>
+    {{selectedAsset.name | uppercase}} asset needs attention
+  </h2>
+  <button (click)="gotoDetail()">View Details</button>
+</div>
 

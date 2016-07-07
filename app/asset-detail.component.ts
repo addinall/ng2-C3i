@@ -14,34 +14,45 @@
 //
 // -------------------------------
 
-    import { Component, Input } from '@angular/core';           // This is the base of the Angular magic.
-                                                                // near EVERYTHING in an Angular app is
-                                                                // a component 
-    import { Asset } from './asset';                            // Bring in our asset class
+    import { Component, OnInit, OnDestroy } from '@angular/core';       // This is the base of the Angular magic.
+    import { ActiveRoute }                  from '@angular/router';     // MVVC software router
 
-    @Component({                                                // set up THIS Component
-        selector: 'my-asset-detail',
-        template: `
-                    <div *ngIf="asset">
-                        <h2>{{asset.name}} Details.</h2> 
-                        <h3>{{asset.owner}} Owner.</h3> 
-                        <div><label>id: </label>{{asset.id}}</div>
-                        <div><label>Name: </label>{{asset.name}}</div>
-                        <div>
-                            <label>Owner: </label>
-                            <input [(ngModel)]="asset.owner" placeholder="name">
-                        </div>
-                    </div>    
-                    `
-    })              
+    import { Asset }                        from './asset';             // Bring in our asset class
+    import {AssetService}                   from './asset.service';
 
+@Component({
+  selector: 'my-asset-detail',
+  templateUrl: 'app/asset-detail.component.html',
+  styleUrls: ['app/asset-detail.component.css']
+})
 
-    export class AssetDetailComponent {                         // and make an application component
-        @Input()
-        asset:  Asset;
+//--------------------------------------------------------------
+export class AssetDetailComponent implements OnInit, OnDestroy {
+  asset: Asset;
+  sub: any;
+
+  constructor(
+    private assetService: AssetService,
+    private route: ActivatedRoute) {
+  }
+
+    //------------------------
+    ngOnInit() {
+        this.sub = this.route.params.subscribe(params => {
+            let id = +params['id'];
+            this.assetService.getAsset(id)
+                .then(asset => this.asset = asset);
+        });
     }
 
+    ngOnDestroy() {
+        this.sub.unsubscribe();
+    }
 
+    goBack() {
+        window.history.back();
+    }
+}
 
 // --------------------------  EOF --------------------------
 

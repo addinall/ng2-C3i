@@ -15,11 +15,8 @@
 
 
     import  { Component         }   from    '@angular/core';
-    import  { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
+    import  { ROUTER_DIRECTIVES }   from    '@angular/router';
 
-    import  { DashboardComponent}   from    './dashboard.component';
-    import  { AssetsComponent   }   from    './assets.component';
-    import  { AssetDetailComponent} from    './asset-detail.component';
     import  { AssetService      }   from    './asset.service';
 
 
@@ -29,37 +26,18 @@
         template: `
                     <h1>{{title}}</h1>
                     <nav>
-                        <a [routerLink]="['Dashboard']">Dashboard</a>
-                        <a [routerLink]="['Assets']">Assets</a>
+                        <a [routerLink]="['/dashboard']" routerLinkActive="active">Dashboard</a>
+                        <a [routerLink]="['/assets']" routerLinkActive="active">Assets</a>
                     </nav>
                     <router-outlet><router-outlet>
                   `,
         styleUrls: ['app/app.component.css'],
         directives: [ROUTER_DIRECTIVES],
         providers:  [
-            ROUTER_PROVIDERS,
             AssetService
         ]
    })
 
-   @RouteConfig([
-       {
-           path:            '/dashboard',
-           name:            'Dashboard',
-           component:       DashboardComponent,
-           useAsDefault:    true
-       },
-       {
-           path:            'detail/:id',
-           name:            'AssetDetail',
-           component:       AssetDetailComponent
-       },
-       {
-           path:            '/assets',
-           name:            'Assets',
-           component:       AssetsComponent
-       }
-   ])
 
    export class AppComponent {
        title = 'C3I COMMAND and CONTROL';

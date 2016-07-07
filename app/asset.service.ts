@@ -24,6 +24,11 @@
         getAssets() {
             return Promise.resolve(ASSETS);             // asynchronous, so PROMISE
         }
+
+       getAsset(id: number) {
+           return this.getAssets()
+                    . then(assets => assets.find(asset => asset.id === id));
+       }
     }
 
     // -------------- EOF -------------------
